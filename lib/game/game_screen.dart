@@ -18,7 +18,8 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   Future<void> _launchURL() async {
-    final Uri url = Uri.parse('https://www.google.com');
+    final Uri url = Uri.parse(
+        'https://www.linkedin.com/in/muhammad-taha-randhawa-7823a125a/');
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
@@ -37,9 +38,11 @@ class _GameScreenState extends State<GameScreen> {
           width: width,
           height: height,
           decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bg_screen.png'),
-                  fit: BoxFit.fill)),
+            image: DecorationImage(
+              image: AssetImage('assets/images/bg_screen.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
@@ -47,14 +50,15 @@ class _GameScreenState extends State<GameScreen> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 ElevatedButton(
-                    onPressed: _launchURL, child: const Text("@taha_dev")),
+                  onPressed: _launchURL,
+                  child:
+                      const Text("@taha_dev", style: TextStyle(fontSize: 18)),
+                ),
                 const GameBoard(),
                 Text(
                   "Players",
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(color: Colors.white),
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 Consumer<GameProvider>(
                   builder: (context, value, child) => Row(
@@ -63,45 +67,74 @@ class _GameScreenState extends State<GameScreen> {
                       Expanded(
                         child: TextField(
                           controller: value.player1Controller,
-                          style: const TextStyle().copyWith(
-                            color: Colors.white,
-                          ),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                              suffixIcon: const Icon(Icons.edit),
-                              border: InputBorder.none,
-                              hintText: "Player 1",
-                              hintStyle: const TextStyle().copyWith(
-                                color: Colors.white,
-                              )),
+                            suffixIcon:
+                                const Icon(Icons.edit, color: Colors.white),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: value.currentPlayer == 'X'
+                                      ? const Color(0XFFF99D17)
+                                      : Colors.white,
+                                  width: 3),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: value.currentPlayer == 'X'
+                                      ? const Color(0XFFF99D17)
+                                      : Colors.white,
+                                  width: 3),
+                            ),
+                            hintText: "Player 1",
+                            hintStyle: const TextStyle(color: Colors.white),
+                            filled: true,
+                            fillColor: Colors.black54,
+                          ),
                         ),
                       ),
                       const SizedBox(
-                        height: 40, // You can adjust the height as needed
+                        height: 40,
                         child: VerticalDivider(
-                          width:
-                              40, // This width only affects the spacing around the divider
-                          thickness: 2, // Adjust the thickness as needed
+                          width: 40,
+                          thickness: 2,
                           color: Colors.white,
                         ),
                       ),
                       Expanded(
                         child: TextField(
                           controller: value.player2Controller,
-                          style: const TextStyle().copyWith(
-                            color: Colors.white,
-                          ),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                              suffixIcon: const Icon(Icons.edit),
-                              border: InputBorder.none,
-                              hintText: "Player 2",
-                              hintStyle: const TextStyle().copyWith(
-                                color: Colors.white,
-                              )),
+                            suffixIcon:
+                                const Icon(Icons.edit, color: Colors.white),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: value.currentPlayer == 'O'
+                                      ? const Color(0XFFF99D17)
+                                      : Colors.white,
+                                  width: 3),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: value.currentPlayer == 'O'
+                                      ? const Color(0XFFF99D17)
+                                      : Colors.white,
+                                  width: 3),
+                            ),
+                            hintText: "Player 2",
+                            hintStyle: const TextStyle(color: Colors.white),
+                            filled: true,
+                            fillColor: Colors.black54,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

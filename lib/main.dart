@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     DevicePreview(
-      enabled: true,
+      enabled: false,
       builder: (context) => ChangeNotifierProvider(
         create: (context) => GameProvider(),
         child: const MyApp(),
